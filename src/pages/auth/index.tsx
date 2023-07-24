@@ -1,4 +1,4 @@
-import { AuthModalState } from "@/atoms/authModalAtom";
+import { authModalState } from "@/atoms/authModalAtom";
 import AuthModal from "@/components/Modals/AuthModal";
 import Navbar from "@/components/Navbar/Navbar";
 import React from "react";
@@ -8,7 +8,7 @@ type AuthPageProps = {};
 
 const AuthPage:React.FC<AuthPageProps> = () => {
   // If recoil state is open
-  const authModal = useRecoilValue(AuthModalState)
+  const authModal = useRecoilValue(authModalState)
   return (
     <div className='bg-gradient-to-b from-gray-600 to-black h-screen relative'>
       <div className='max-w-7x1 mx-auto'>

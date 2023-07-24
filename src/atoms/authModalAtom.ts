@@ -10,7 +10,7 @@ const initialAuthModalState: AuthModalState = {
   type: 'login',
 }
 
-export const AuthModalState = atom<AuthModalState>({
+export const authModalState = atom<AuthModalState>({
   key: 'authModalState',
   default: initialAuthModalState,
 })
