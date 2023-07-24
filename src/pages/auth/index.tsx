@@ -21,7 +21,7 @@ const AuthPage:React.FC<AuthPageProps> = () => {
           pointer-events-none
           select-none
         '>
-          <img src='/hero.png' alt='Hero image' />
+          <img src='/hero-k.jpeg' alt='Hero image' />
         </div>
         <AuthModal />
       </div>
