@@ -1,31 +1,34 @@
-import AuthModal from '@/components/Modals/AuthModal';
-import Navbar from '@/components/Navbar/Navbar';
-import React from 'react';
+import { AuthModalState } from "@/atoms/authModalAtom";
+import AuthModal from "@/components/Modals/AuthModal";
+import Navbar from "@/components/Navbar/Navbar";
+import React from "react";
+import { useRecoilValue } from "recoil";
 
-type AuthPageProps = {
-  
-};
+type AuthPageProps = {};
 
 const AuthPage:React.FC<AuthPageProps> = () => {
-  
+  // If recoil state is open
+  const authModal = useRecoilValue(AuthModalState)
   return (
-    // Background gradient will add later
-    <div className="">
-      <div className='max-w-7xl mx-auto'>
+    <div className='bg-gradient-to-b from-gray-600 to-black h-screen relative'>
+      <div className='max-w-7x1 mx-auto'>
         <Navbar />
-        <div className='
-          flex
-          items-center
-          justify-center
-          h-[calc(100vh-5rem)]
-          pointer-events-none
-          select-none
-        '>
-          <img src='/hero-k.jpeg' alt='Hero image' />
+        <div 
+          className="
+            flex 
+            items-center 
+            justify-center 
+            h-[calc(100vh-5rem)] 
+            pointer-events-none 
+            select-none
+          "
+        >
+          <img src='/hero-k.jpeg' alt='Hero Image'/>
         </div>
-        <AuthModal />
+        {/* If recoil state is open */}
+        {authModal.isOpen && <AuthModal /> }
       </div>
     </div>
-  )
+	);
 }
 export default AuthPage;
