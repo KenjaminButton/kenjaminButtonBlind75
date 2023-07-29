@@ -12,7 +12,7 @@ export default function Home() {
 					uppercase mt-10 mb-5'
 				>
 					&ldquo; Kenjamin's Blind 75 &rdquo; 
-          <p>😀 😃 😄 😁 😆 😅 😂 🤣 🥲 🥹 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 😝 😜 🤪 🤨 🧐 🤓 😎 🥸 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 😣 😖 😫 😩 🥺 😢 😭 😮‍💨 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🫣 🤗 🫡 🤔 🫢 🤭 🤫 🤥 😶 😶‍🌫️ 😐 😑 😬 🫨 🫠 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 😵‍💫 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕 🤑 🤠 💩</p>
+          <p>💩 🤬 🤤 😆 🫢 🥹 😉 😌 😍 🤪 🤨 🧐 😏 😒 😔 🙁 😣 🥺 😢 😮‍💨 😤 🤗 🤔 😶 😐 😑 😬 🙄 😦 😮 😴 😪 😵 😵‍💫 🤐 🥴 🤑 🤠 </p>
 				</h1>
 				<div className='relative overflow-x-auto mx-auto px-6 pb-10'>
 					<table className='text-sm text-left text-gray-500 dark:text-gray-400 sm:w-7/12 w-full max-w-[1200px] mx-auto'>

@@ -7,13 +7,17 @@
 [Tailwind CSS](https://tailwindcss.com/)
 [Firebase]()
 
+# Tailwind CSS Color Theme
+https://v1.tailwindcss.com/docs/customizing-colors
+
+
 ## Next Steps:
 
 - [x] Firebase Setup
 - [x] Signup Functionality
 - [x] Login Functionality
-- [] Auth Page Route Guard
-- [] Home Page UI
+- [X] Auth Page Route Guard
+- [X] Home Page UI
 
-# Tailwind CSS Color Theme
-https://v1.tailwindcss.com/docs/customizing-colors
+
+

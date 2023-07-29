@@ -17,7 +17,7 @@ const Topbar:React.FC<TopbarProps> = () => {
 				<div className='flex items-center space-x-4 flex-1 justify-end'>
 					<div>
 						<a
-							href='https://www.buymeacoffee.com/kenjaminbutton'
+							href='https://www.buymeacoffee.com/thekenjaminbutton'
 							target='_blank'
 							rel='noreferrer'
 							className='bg-indigo-300 py-1.5 px-3 cursor-pointer rounded text-orange-300 hover:bg-dark-fill-2'
