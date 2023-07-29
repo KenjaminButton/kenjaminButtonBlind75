@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { authModalState } from '@/atoms/authModalAtom';
 import { useSetRecoilState } from 'recoil';
@@ -45,8 +45,12 @@ const Login:React.FC<LoginProps> = () => {
     }
   }
 
-  console.log('user:::', user);
-  
+  // console.log('user:::', user);
+    useEffect( () => {
+      if (error) alert(error.message)
+    }, [error])
+
+
   return (
     <form className="space y-6 px-6 py-4" onSubmit={handleLogin}>
       <h3 className='text-xl font-medium text-white'>Sign into Kenjamin's Blind 75</h3>
@@ -119,7 +123,7 @@ const Login:React.FC<LoginProps> = () => {
           hover:bg-brand-orange-s
         '
       >
-        LOGIN
+        {loading ? "loading..." : "Login"}
       </button>
       <button 
         className='
