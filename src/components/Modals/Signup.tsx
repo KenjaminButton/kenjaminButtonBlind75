@@ -27,9 +27,10 @@ const Signup:React.FC<SignupProps> = () => {
     // Destructuring state to update specific field
     setInputs( (prev) => ({ ...prev, [e.target.name]: e.target.value}))
   }
-  const handleRegister = async (e:React.ChangeEvent<HTMLInputElement>) => {
+  const handleRegister = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // console.log('handleRegister inputs:::', inputs)
+    if (!inputs.email || !inputs.password || !inputs.displayName) return alert("Please fill in all required fields")
+
     try {
       const newUser = await createUserWithEmailAndPassword(inputs.email, inputs.password)
       if (!newUser) return;
