@@ -9,8 +9,8 @@
 
 ## Next Steps:
 
-- [] Firebase Setup
-- [] Signup Functionality
-- [] Login Functionality
+- [x] Firebase Setup
+- [x] Signup Functionality
+- [x] Login Functionality
 - [] Auth Page Route Guard
 - [] Home Page UI
