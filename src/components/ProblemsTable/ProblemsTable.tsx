@@ -30,7 +30,10 @@ const ProblemsTable:React.FC<ProblemsTableProps> = () => {
               {doc.category}
             </td>
             <td className={'px-6 py-4'}>
-              {doc.videoId ? (<AiFillYoutube />) : (
+              {doc.videoId ? (<AiFillYoutube 
+                className='cursor-pointer hover:text-red-600'
+                fontSize={'25'}
+              />) : (
                 <p className='text-gray-400'>I'll post this after I solve it</p>
               )}
             </td>
