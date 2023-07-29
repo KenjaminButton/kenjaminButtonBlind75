@@ -14,3 +14,6 @@
 - [x] Login Functionality
 - [] Auth Page Route Guard
 - [] Home Page UI
+
+# Tailwind CSS Color Theme
+https://v1.tailwindcss.com/docs/customizing-colors

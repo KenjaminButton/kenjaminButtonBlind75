@@ -8,7 +8,7 @@ type TopbarProps = {
 const Topbar:React.FC<TopbarProps> = () => {
     
     return (
-		<nav className='relative flex h-[50px] w-full shrink-0 items-center px-5 bg-dark-layer-1 text-dark-gray-7'>
+		<nav className='relative flex h-[50px] w-full shrink-0 items-center px-5 bg-indigo-400 text-white'>
 			<div className={`flex w-full items-center justify-between`}>
 				<Link href='/' className='h-[22px] flex-1'>
 					<img src='/logo-k.png' alt='Logo' height={100} width={100} />
@@ -20,7 +20,7 @@ const Topbar:React.FC<TopbarProps> = () => {
 							href='https://www.buymeacoffee.com/kenjaminbutton'
 							target='_blank'
 							rel='noreferrer'
-							className='bg-dark-fill-3 py-1.5 px-3 cursor-pointer rounded text-brand-orange hover:bg-dark-fill-2'
+							className='bg-indigo-300 py-1.5 px-3 cursor-pointer rounded text-orange-300 hover:bg-dark-fill-2'
 						>
 							Premium
 						</a>
@@ -29,7 +29,7 @@ const Topbar:React.FC<TopbarProps> = () => {
                     <Link
                         href='/auth'
                     >
-                        <button className='bg-dark-fill-3 py-1 px-2 cursor-pointer rounded '>Sign In</button>
+                        <button className='bg-indigo-300 py-1 px-2 cursor-pointer rounded '>Sign In</button>
                     </Link>
 				</div>
 			</div>
