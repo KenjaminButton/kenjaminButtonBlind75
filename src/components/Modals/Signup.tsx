@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { authModalState } from '@/atoms/authModalAtom';
 import { useSetRecoilState } from 'recoil';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -39,6 +39,10 @@ const Signup:React.FC<SignupProps> = () => {
     }
   }
   // console.log('signup inputs:::', inputs)
+  useEffect( () => {
+    if (error) alert(error.message)
+  }, [error])
+
   return (
     <form className='space y-6 px-6 py-4' onSubmit={handleRegister}>
     <h3 className='text-xl font-medium text-white'>Register to Kenjamin's Blind 75</h3>
