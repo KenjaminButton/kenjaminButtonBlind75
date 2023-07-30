@@ -19,5 +19,6 @@ https://v1.tailwindcss.com/docs/customizing-colors
 - [X] Auth Page Route Guard
 - [X] Home Page UI
 
+- [x] Logout Functionality
 
 
