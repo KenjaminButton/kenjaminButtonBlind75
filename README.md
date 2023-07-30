@@ -5,7 +5,9 @@
 [Recoil JS](https://recoiljs.org/)
 
 [Tailwind CSS](https://tailwindcss.com/)
-[Firebase]()
+[Firebase](https://firebase.google.com/)
+
+[React Firebase Hooks](https://github.com/CSFrequency/react-firebase-hooks/tree/master/auth)
 
 # Tailwind CSS Color Theme
 https://v1.tailwindcss.com/docs/customizing-colors
@@ -20,5 +22,10 @@ https://v1.tailwindcss.com/docs/customizing-colors
 - [X] Home Page UI
 
 - [x] Logout Functionality
+- [] Reset Password Functionality
+- [] React Toastify
+- [] Image Optimizations
+- [] Creating PID page
+- [] Updating Topbar
 
 
