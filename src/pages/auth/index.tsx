@@ -2,6 +2,7 @@ import { authModalState } from "@/atoms/authModalAtom";
 import AuthModal from "@/components/Modals/AuthModal";
 import Navbar from "@/components/Navbar/Navbar";
 import { auth } from "@/firebase/firebase";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -37,7 +38,7 @@ const AuthPage:React.FC<AuthPageProps> = () => {
             select-none
           "
         >
-          <img src='/hero-k.jpeg' alt='Hero Image'/>
+          <Image src='/hero-k.jpeg' alt='Hero Image' height={700} width={700} />
         </div>
         {/* If recoil state is open */}
         {authModal.isOpen && <AuthModal /> }
