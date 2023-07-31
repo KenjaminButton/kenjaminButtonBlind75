@@ -22,8 +22,8 @@ https://v1.tailwindcss.com/docs/customizing-colors
 - [X] Home Page UI
 
 - [x] Logout Functionality
-- [] Reset Password Functionality
-- [] React Toastify
+- [x] Reset Password Functionality
+- [x] React Toastify
 - [] Image Optimizations
 - [] Creating PID page
 - [] Updating Topbar

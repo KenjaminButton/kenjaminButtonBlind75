@@ -5,18 +5,15 @@ import { useSetRecoilState } from 'recoil';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/firebase';
 import { useRouter } from 'next/router';
-import { log } from 'console';
+import { toast } from 'react-toastify'
 
 
-type LoginProps = {
-  
-};
+type LoginProps = {};
 
 const Login:React.FC<LoginProps> = () => {
   const setAuthModalState = useSetRecoilState(authModalState)
   const handleClick = (type:"login" | "register" | "forgotPassword") => {
     setAuthModalState( (prev) => ({ ...prev, type }))
-
   }
 
   const [inputs, setInputs] = useState({email: "", password: ""})
@@ -41,13 +38,13 @@ const Login:React.FC<LoginProps> = () => {
       if (!newUser) return
       router.push('/')
     } catch(error:any) {
-      alert(error.message)
+      toast.error(error.message, {position: 'top-center', autoClose: 3500, theme: 'dark'})
     }
   }
 
   // console.log('user:::', user);
     useEffect( () => {
-      if (error) alert(error.message)
+      if (error) toast.error(error.message, {position: 'top-center', autoClose: 3500, theme: 'dark'})
     }, [error])
 
 
