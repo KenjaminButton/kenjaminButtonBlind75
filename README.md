@@ -35,8 +35,9 @@ https://v1.tailwindcss.com/docs/customizing-colors
 
 
 - [x] Timer Component
-- [] Workspace component
-- [] Splitting the page
-- [] Problem description
-- [] Preferences Navigation
+- [x] Workspace component
+- [x] Splitting the page
+- [x] Problem description
+- [x] Preferences Navigation
+
 - [] Create a code editor
