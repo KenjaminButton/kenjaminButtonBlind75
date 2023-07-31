@@ -24,8 +24,11 @@ https://v1.tailwindcss.com/docs/customizing-colors
 - [x] Logout Functionality
 - [x] Reset Password Functionality
 - [x] React Toastify
-- [] Image Optimizations
-- [] Creating PID page
-- [] Updating Topbar
+- [x] Image Optimizations
+- [x] Creating PID page
+- [x] Updating Topbar
+
+
+- [] Timer Component
 
 
