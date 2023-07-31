@@ -48,6 +48,61 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = () => {
                 <AiFillDislike />
                 <span className='text-xs'>998</span>
               </div>
+              <div className='cursor-pointer hover:bg-dark-fill-3 rounded p-[3px] ml-4 text-xl transition-colors duration-200 text-green-s text-dark-gray-7'>
+                <TiStarOutline />
+              </div>
+            </div>
+
+            {/* Problem Statement aka Paragraphs */}
+            <div className='text-white text-sm'>
+              <p className='mt-3'>
+                Given an array of integers <code>nums</code> and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to</em> <code>target</code>.
+              </p>
+              <p className='mt-3'>
+                You may assume that each input would have <strong>exactly one solution</strong>, and you may not use the same element twice.
+              </p>
+              <p className='mt-3'>You can return the answer in any order.</p>
+            </div>
+
+            {/* {Examples} */}
+            <div className='mt-4'>
+              {/* Example 1 */}
+              <div>
+                <p className='font-medium text-white'>Example 1:</p>
+                <div className='example-card'>
+                  <pre>
+                    <strong className='text-white'>Input: </strong> nums = [2, 7, 11, 15], target=9{" "}, we return [0, 1]
+                      <br />
+                      <strong>Output:</strong> [0, 1] <br />
+                      <strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].
+                  </pre>
+                </div>
+              </div>
+              {/* Example 2 */}
+              <div>
+                <p className='font-medium text-white'>Example 2:</p>
+                <div className='example-card'>
+                  <pre>
+                    <strong className='text-white'>Input: </strong> nums = [2, 7, 11, 15], target=9{" "}, we return [0, 1]
+                      <br />
+                      <strong>Output:</strong> [0, 1] <br />
+                      <strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].
+                  </pre>
+                </div>
+              </div>
+              {/* Example 3 */}
+              <div>
+                <p className='font-medium text-white'>Example 3:</p>
+                <div className='example-card'>
+                  <pre>
+                    <strong className='text-white'>Input: </strong> nums = [2, 7, 11, 15], target=9{" "}, we return [0, 1]
+                      <br />
+                      <strong>Output:</strong> [0, 1] <br />
+                      <strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].
+                  </pre>
+                </div>
+              </div>
+            
             </div>
 
           </div>
