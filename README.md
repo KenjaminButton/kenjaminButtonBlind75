@@ -43,4 +43,6 @@ https://v1.tailwindcss.com/docs/customizing-colors
 - [x] Preferences Navigation
 
 - [x] Create a code editor
-- [] Writing test cases for the UI
+- [x] Writing test cases for the UI
+
+
