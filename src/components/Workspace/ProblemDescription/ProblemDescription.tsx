@@ -69,42 +69,27 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
 
             {/* {Examples} */}
             <div className='mt-4'>
-              {/* Example 1 */}
-              <div>
-                <p className='font-medium text-white'>Example 1:</p>
-                <div className='example-card'>
-                  <pre>
-                    <strong className='text-white'>Input: </strong> nums = [2, 7, 11, 15], target=9{" "}, we return [0, 1]
-                      <br />
-                      <strong>Output:</strong> [0, 1] <br />
-                      <strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].
-                  </pre>
-                </div>
-              </div>
-              {/* Example 2 */}
-              <div>
-                <p className='font-medium text-white'>Example 2:</p>
-                <div className='example-card'>
-                  <pre>
-                    <strong className='text-white'>Input: </strong> nums = [2, 7, 11, 15], target=9{" "}, we return [0, 1]
-                      <br />
-                      <strong>Output:</strong> [0, 1] <br />
-                      <strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].
-                  </pre>
-                </div>
-              </div>
-              {/* Example 3 */}
-              <div>
-                <p className='font-medium text-white'>Example 3:</p>
-                <div className='example-card'>
-                  <pre>
-                    <strong className='text-white'>Input: </strong> nums = [2, 7, 11, 15], target=9{" "}, we return [0, 1]
-                      <br />
-                      <strong>Output:</strong> [0, 1] <br />
-                      <strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].
-                  </pre>
-                </div>
-              </div>
+            {problem.examples.map((example, index) => (
+								<div key={example.id}>
+									<p className='font-medium text-white '>Example {index + 1}: </p>
+									{example.img && <img src={example.img} alt='' className='mt-3' />}
+									<div className='example-card'>
+										<pre>
+											<strong className='text-white'>Input: </strong> {example.inputText}
+											<br />
+											<strong>Output:</strong>
+											{example.outputText} <br />
+											{example.explanation && (
+												<>
+													<strong>Explanation:</strong> {example.explanation}
+												</>
+											)}
+										</pre>
+									</div>
+								</div>
+							))}
+
+
             
             </div>
 
