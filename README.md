@@ -18,6 +18,8 @@
 https://v1.tailwindcss.com/docs/customizing-colors
 
 
+![ERD Draft](./ERD-Draft.png)
+
 ## Next Steps:
 
 - [x] Firebase Setup
