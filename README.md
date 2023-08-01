@@ -45,4 +45,4 @@ https://v1.tailwindcss.com/docs/customizing-colors
 - [x] Create a code editor
 - [x] Writing test cases for the UI
 
-
+- [] Use SSG (Static Site Generation) for `[pid].tsx`

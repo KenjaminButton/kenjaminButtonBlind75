@@ -14,6 +14,9 @@ export type Problem = {
   constraints: string;
   order: number;
   starterCode: string;
+  // Error: Error serializing `.problem.handlerFunction` returned from `getStaticProps` in "/problems/[pid]".
+  // Reason: `function` cannot be serialized as JSON. Please only return JSON serializable data types.
   handlerFunction: ((fn: any) => boolean) | string;
   starterFunctionName: string;
 }
+
