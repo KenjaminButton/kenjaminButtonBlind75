@@ -75,8 +75,8 @@ export default function Home() {
 					</table>
 				</div>
 
-				{/* temporary form */}
-				<form 
+				{/* temporary form for submitting problems data*/}
+				{/* <form 
 					className="p-6 flex flex-col max-w-sm gap-3"
 					onSubmit={handleSubmit}	
 				>
@@ -88,7 +88,7 @@ export default function Home() {
 					<input onChange={handleInputChange} type='text' placeholder='videoId?' name='videoId' />
 					<input onChange={handleInputChange} type='text' placeholder='link?' name='link' />
 					<button className="bg-white">Save to Firebase</button>
-				</form>
+				</form> */}
 			</main>
 		</>
 	);
