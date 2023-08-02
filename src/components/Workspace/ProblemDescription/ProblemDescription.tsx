@@ -1,5 +1,9 @@
-import { Problem } from '@/utils/types/problem';
-import React from 'react'
+import CircleSkeleton from '@/components/Skeletons/CircleSkeleton';
+import RectangleSkeleton from '@/components/Skeletons/RectangleSkeleton';
+import { firestore } from '@/firebase/firebase';
+import { DBProblem, Problem } from '@/utils/types/problem';
+import { doc, getDoc } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react'
 import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { BsCheck2Circle } from "react-icons/bs";
 import { TiStarOutline } from "react-icons/ti";
@@ -9,6 +13,7 @@ type ProblemDescriptionProps = {
 };
 
 const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
+  const {currentProblem, loading, problemDifficultyClass} = useGetCurrentProblem(problem.id);
   return (
 		<div className='bg-dark-layer-1'>
 			{/* TAB */}
@@ -25,10 +30,10 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
 						<div className='flex space-x-4'>
 							<div className='flex-1 mr-2 text-lg text-white font-medium'>{problem.title}</div>
 						</div>
-            <div className='flex items-center mt-3'>
-              <div className='
-                text-olive 
-                bg-olive 
+            {!loading && currentProblem && (
+              <div className='flex items-center mt-3'>
+              <div className={`
+                ${problemDifficultyClass}
                 inline-block 
                 rounded-[21px] 
                 bg-opacity-[.15] 
@@ -36,25 +41,38 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
                 py-1 
                 text-xs 
                 font-medium 
-                capitalize'
+                capitalize
+                `}
               >
-                Easy
+                {currentProblem.difficulty}
               </div>
               <div className='rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-green-s text-dark-green-s'>
                 <BsCheck2Circle />
               </div>
               <div className='flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-dark-gray-6'>
                 <AiFillLike />
-                <span className='text-xs'>127</span>
+                <span className='text-xs'>{currentProblem.likes}</span>
               </div>
               <div className='flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-dark-gray-6'>
                 <AiFillDislike />
-                <span className='text-xs'>998</span>
+                <span className='text-xs'>{currentProblem.dislikes}</span>
               </div>
               <div className='cursor-pointer hover:bg-dark-fill-3 rounded p-[3px] ml-4 text-xl transition-colors duration-200 text-green-s text-dark-gray-7'>
                 <TiStarOutline />
               </div>
             </div>
+            )}
+
+            {/* Loading for likes, dislikes, difficulty etc... */}
+            {loading && (
+							<div className='mt-3 flex space-x-2'>
+								<RectangleSkeleton />
+								<CircleSkeleton />
+								<RectangleSkeleton />
+								<RectangleSkeleton />
+								<CircleSkeleton />
+							</div>
+						)}
 
             {/* Problem Statement aka Paragraphs */}
             <div className='text-white text-sm'>
@@ -107,3 +125,43 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
 };
 
 export default ProblemDescription;
+
+function useGetCurrentProblem(problemId: string) {
+  // Fetching logic
+  const [currentProblem, setCurrentProblem] = useState<DBProblem | null>(null)
+  const [loading, setLoading] = useState<boolean>(true)
+  const [problemDifficultyClass, setProblemDifficultyClass] = useState<string>('')
+  useEffect( () => {
+    // Get problem from DB
+    const getCurrentProblem = async () => {
+      setLoading(true)
+      const docRef = doc(firestore, "problems", problemId);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const problem = docSnap.data()
+        // console.log('current Problem:::', problem)
+        setCurrentProblem({id:docSnap.id, ...problem} as DBProblem)
+        setProblemDifficultyClass(
+          problem.difficulty === 'Easy' ? 'bg-olive text-olive' : problem.difficulty === 'Medium'  ? 'bg-dark-yellow text-dark-yellow' : 'bg-dark-pink text-dark-pink'
+        )
+      } 
+      setLoading(false)
+    }
+    getCurrentProblem()
+  }, [problemId])
+
+  return {currentProblem, loading, problemDifficultyClass}
+}
+
+// Firebase Docs Get a Document
+// import { doc, getDoc } from "firebase/firestore";
+
+// const docRef = doc(db, "cities", "SF");
+// const docSnap = await getDoc(docRef);
+
+// if (docSnap.exists()) {
+//   console.log("Document data:", docSnap.data());
+// } else {
+//   // docSnap.data() will be undefined in this case
+//   console.log("No such document!");
+// }
