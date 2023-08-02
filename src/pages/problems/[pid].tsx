@@ -10,7 +10,7 @@ type ProblemPageProps = {
 };
 
 const ProblemPage:React.FC<ProblemPageProps> = ({problem}) => {
-  console.log("problem:::", problem)
+  // console.log("problem:::", problem)
   return (
     <div>
       <Topbar problemPage />
