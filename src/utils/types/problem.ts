@@ -6,6 +6,7 @@ export type Example = {
   img?: string;
 }
 
+// Local problem data (for mock data) not coming from DB
 export type Problem = {
   id: string;
   title: string;
@@ -20,3 +21,15 @@ export type Problem = {
   starterFunctionName: string;
 }
 
+// For firestore firebase data
+export type DBProblem = {
+  id: string;
+  title: string;
+  category: string;
+  difficulty: string;
+  likes: number;
+  dislikes: number;
+  order: number;
+  videoId?: string;
+  link?: string;
+}

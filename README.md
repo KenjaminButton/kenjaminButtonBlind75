@@ -20,6 +20,8 @@ https://v1.tailwindcss.com/docs/customizing-colors
 
 ![ERD Draft](./ERD-Draft.png)
 
+Temporary Solution to adding problems to firestore: `src/pages/index.tsx`
+
 ## Next Steps:
 
 - [x] Firebase Setup
@@ -45,4 +47,10 @@ https://v1.tailwindcss.com/docs/customizing-colors
 - [x] Create a code editor
 - [x] Writing test cases for the UI
 
-- [] Use SSG (Static Site Generation) for `[pid].tsx`
+- [x] Use SSG (Static Site Generation) for `[pid].tsx`
+- [x] Updated test cases UI 
+- [x] Adding problems to firestore through a temporary form
+
+-[x] Loading wheel during fetch...
+-[x] Fetch problems from firebase DB
+
