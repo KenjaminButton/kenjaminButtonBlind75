@@ -24,33 +24,10 @@ Temporary Solution to adding problems to firestore: `src/pages/index.tsx`
 
 ## Next Steps:
 
-- [x] Firebase Setup
-- [x] Signup Functionality
-- [x] Login Functionality
-- [X] Auth Page Route Guard
-- [X] Home Page UI
-
-- [x] Logout Functionality
-- [x] Reset Password Functionality
-- [x] React Toastify
-- [x] Image Optimizations
-- [x] Creating PID page
-- [x] Updating Topbar
+- [x] Build out dislike functionality 
+- [] Build out favorites (star) functionality
+- [] Build out next && previous problem links
 
 
-- [x] Timer Component
-- [x] Workspace component
-- [x] Splitting the page
-- [x] Problem description
-- [x] Preferences Navigation
 
-- [x] Create a code editor
-- [x] Writing test cases for the UI
-
-- [x] Use SSG (Static Site Generation) for `[pid].tsx`
-- [x] Updated test cases UI 
-- [x] Adding problems to firestore through a temporary form
-
-- [x] Loading wheel during fetch...
-- [x] Fetch problems from firebase DB
 

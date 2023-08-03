@@ -20,6 +20,14 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
   const {liked, disliked, solved, setData, starred} = useGetUsersDataOnProblem(problem.id)
   const [updating, setUpdating] = useState(false);
 
+  const returnUserAndProblemData = async (transaction: any) => {
+    const userRef = doc(firestore, "users", user!.uid)
+    const problemRef = doc(firestore, "problems", problem.id)
+    const userDoc = await transaction.get(userRef)
+    const problemDoc = await transaction.get(problemRef)
+    return {userDoc, problemDoc, userRef, problemRef}
+  }
+
   const handleLike = async () => {
     if (!user) {
       toast.error("You must be logged in to like a problem", {position: "top-left", theme: "dark"})
@@ -28,10 +36,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
     if (updating) return;
 		setUpdating(true);
 		await runTransaction(firestore, async (transaction) => {
-			const userRef = doc(firestore, "users", user.uid)
-      const problemRef = doc(firestore, "problems", problem.id)
-      const userDoc = await transaction.get(userRef)
-      const problemDoc = await transaction.get(problemRef)
+      const {userDoc, problemDoc, userRef, problemRef}= await returnUserAndProblemData(transaction)
 
 			if (userDoc.exists() && problemDoc.exists()) {
 				if (liked) {
@@ -72,6 +77,57 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
 			}
 		});
 		setUpdating(false);
+  }
+
+  const handleDislike = async () => {
+    if (!user) {
+      toast.error("You must be logged in to pass hate on a problem", {position: "top-left", theme: "dark"})
+      return
+    }
+    if (updating) return;
+		setUpdating(true);
+    await runTransaction(firestore, async (transaction) => {
+      const {userDoc, problemDoc, userRef, problemRef}= await returnUserAndProblemData(transaction)
+
+      if (userDoc.exists() && problemDoc.exists()) {
+        // User already has passed hate
+        // User already has passed like
+        // User has yet to pass hate or like
+        if (disliked) {
+					transaction.update(userRef, {
+						dislikedProblems: userDoc.data().dislikedProblems.filter((id: string) => id !== problem.id),
+					});
+					transaction.update(problemRef, {
+						dislikes: problemDoc.data().dislikes - 1,
+					});
+					setCurrentProblem((prev) => (prev ? { ...prev, dislikes: prev.dislikes - 1 } : null));
+					setData((prev) => ({ ...prev, disliked: false }));
+				} else if (liked) {
+					transaction.update(userRef, {
+						dislikedProblems: [...userDoc.data().dislikedProblems, problem.id],
+						likedProblems: userDoc.data().likedProblems.filter((id: string) => id !== problem.id),
+					});
+					transaction.update(problemRef, {
+						dislikes: problemDoc.data().dislikes + 1,
+						likes: problemDoc.data().likes - 1,
+					});
+					setCurrentProblem((prev) =>
+						prev ? { ...prev, dislikes: prev.dislikes + 1, likes: prev.likes - 1 } : null
+					);
+					setData((prev) => ({ ...prev, disliked: true, liked: false }));
+				} else {
+					transaction.update(userRef, {
+						dislikedProblems: [...userDoc.data().dislikedProblems, problem.id],
+					});
+					transaction.update(problemRef, {
+						dislikes: problemDoc.data().dislikes + 1,
+					});
+					setCurrentProblem((prev) => (prev ? { ...prev, dislikes: prev.dislikes + 1 } : null));
+					setData((prev) => ({ ...prev, disliked: true }));
+				}
+      }
+    })
+    setUpdating(false)
   }
 
   return (
@@ -133,8 +189,27 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
 
                 <span className='text-xs'>{currentProblem.likes}</span>
               </div>
-              <div className='flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-dark-gray-6'>
-                <AiFillDislike />
+              <div 
+                className='
+                  flex 
+                  items-center 
+                  cursor-pointer 
+                  hover:bg-dark-fill-3 
+                  space-x-1 
+                  rounded 
+                  p-[3px] 
+                  ml-4 
+                  text-lg 
+                  transition-colors 
+                  duration-200 
+                  text-dark-gray-6
+                '
+                onClick={handleDislike}
+              >
+                {disliked && !updating && <AiFillDislike className='text-dark-blue-s'/>}
+                {!disliked && !updating && <AiFillDislike />}
+                {updating && <AiOutlineLoading3Quarters className='animate-spin'/>}
+
                 <span className='text-xs'>{currentProblem.dislikes}</span>
               </div>
               <div className='cursor-pointer hover:bg-dark-fill-3 rounded p-[3px] ml-4 text-xl transition-colors duration-200 text-green-s text-dark-gray-7'>
