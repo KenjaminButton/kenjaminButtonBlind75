@@ -5,7 +5,7 @@ import { DBProblem, Problem } from '@/utils/types/problem';
 import { doc, getDoc, runTransaction } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { AiFillLike, AiFillDislike } from "react-icons/ai";
+import { AiFillLike, AiFillDislike, AiOutlineLoading3Quarters } from "react-icons/ai";
 import { BsCheck2Circle } from "react-icons/bs";
 import { TiStarOutline } from "react-icons/ti";
 import { toast } from 'react-toastify';
@@ -127,9 +127,10 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
                 onClick={handleLike}
               >
 
-
-                {liked &&  <AiFillLike className='text-dark-blue-s'/>}
+                {liked && !updating && <AiFillLike className='text-dark-blue-s'/>}
                 {!liked &&  <AiFillLike />}
+                {updating && <AiOutlineLoading3Quarters className='animate-spin'/>}
+
                 <span className='text-xs'>{currentProblem.likes}</span>
               </div>
               <div className='flex items-center cursor-pointer hover:bg-dark-fill-3 space-x-1 rounded p-[3px] ml-4 text-lg transition-colors duration-200 text-dark-gray-6'>
