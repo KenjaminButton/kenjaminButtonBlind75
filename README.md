@@ -18,7 +18,8 @@
 https://v1.tailwindcss.com/docs/customizing-colors
 
 
-![ERD Draft](./ERD-Draft.png)
+![ERD Draft](./images/ERD-Draft.png)
+![Like Button Transactions](./images/likeButtonTransactions.png)
 
 Temporary Solution to adding problems to firestore: `src/pages/index.tsx`
 
