@@ -128,7 +128,7 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({problem}) => {
               >
 
                 {liked && !updating && <AiFillLike className='text-dark-blue-s'/>}
-                {!liked &&  <AiFillLike />}
+                {!liked &&  !updating && <AiFillLike />}
                 {updating && <AiOutlineLoading3Quarters className='animate-spin'/>}
 
                 <span className='text-xs'>{currentProblem.likes}</span>
