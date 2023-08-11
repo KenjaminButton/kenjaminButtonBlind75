@@ -6,6 +6,11 @@ import { vscodeDark } from '@uiw/codemirror-theme-vscode';
 import { javascript } from '@codemirror/lang-javascript';
 import EditorFooter from './EditorFooter';
 import { Problem } from '@/utils/types/problem';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase/firebase';
+import { toast } from 'react-toastify';
+import { problems } from '@/utils/problems';
+import { useRouter } from 'next/router';
 
 type PlaygroundProps = {
   problem: Problem,
@@ -14,9 +19,59 @@ type PlaygroundProps = {
 
 const Playground:React.FC<PlaygroundProps> = ({problem, setSuccess}) => {
   const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0)
+  const [userCode, setUserCode] =  useState<string>(problem.starterCode) 
+  const [user] = useAuthState(auth)
+  const { query: {pid} } = useRouter()
 
-  const handleSubmit = () => {
-    alert("submitted!")
+  const handleSubmit = async () => {
+    // If user is not logged in, return some error
+    if (!user) {
+      // Do something here. 
+      toast.error('Please log in to submit your code', {
+        position: 'top-center',
+        autoClose: 3000,
+        theme: 'dark'
+      })
+      return
+    }
+    try {
+      // converting string (user's code) to function 
+      const cb = new Function(`return ${userCode}`)()
+      const success = problems[pid as string].handlerFunction(cb)
+      if (success) {
+        toast.success('All test cases have been passed', {
+          position: 'top-center',
+          autoClose: 3000,
+          theme: 'dark'
+        })
+        setSuccess(true)
+        setTimeout( () => {
+            setSuccess(false)
+        }, 4000)
+      }
+    } catch (error) {
+      console.error(error)
+      if (error.message.startsWith('Error: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:')) {
+        // do something
+        toast.error('One or more of our test cases failed', {
+          position: 'top-center',
+          autoClose: 3000,
+          theme: 'dark'
+        })
+      } else {
+        toast.error('Whoops! Something on our end messed up! Fill out an issue ticket and let us know', {
+          position: 'top-center',
+          autoClose: 3000,
+          theme: 'dark'
+        })
+      }
+    }
+  }
+
+  const onChange= (value: string) => {
+    // Giving me the user code
+    // console.log(value)
+    setUserCode(value)
   }
 
   return (
@@ -29,6 +84,7 @@ const Playground:React.FC<PlaygroundProps> = ({problem, setSuccess}) => {
             theme={vscodeDark}
             extensions={[javascript()]}
             style={{fontSize:16}}
+            onChange={onChange}
           />
         </div>
         <div className='w-full px-5 overflow-auto'>
