@@ -26,7 +26,7 @@ Temporary Solution to adding problems to firestore: `src/pages/index.tsx`
 ## Next Steps:
 
 - [x] Build out dislike functionality 
-- [] Build out favorites (star) functionality
+- [x] Build out favorites (star) functionality
 - [] Build out next && previous problem links
 
 
