@@ -24,7 +24,7 @@ const Topbar:React.FC<TopbarProps> = ({problemPage}) => {
 
 	const handleProblemChange = (isForward: boolean) => {
 		// console.log(router.query) // cOnfirming pid field
-		// console.log(problems[router.query.pid]) // Received an obj that need destructuring.
+		// console.log(problems[router.query.pid]) // Received an obj that needs destructuring.
 		const {order} = problems[router.query.pid as string] as Problem;
 		const direction = isForward ? 1 : -1;
 		const nextProblemOrder = order + direction

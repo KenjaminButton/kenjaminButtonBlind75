@@ -31,4 +31,10 @@ Temporary Solution to adding problems to firestore: `src/pages/index.tsx`
 
 
 
+# How to Add New Problems:
+
+- Temporary Solution: Go to `src/pages/index.tsx` and uncomment out the imports, state, and form field
+
+
+
 

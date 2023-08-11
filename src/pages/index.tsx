@@ -1,15 +1,22 @@
 import ProblemsTable from "@/components/ProblemsTable/ProblemsTable";
 import Topbar from "@/components/Topbar/Topbar";
 
+import { useState } from "react";
+import { FaLess } from "react-icons/fa";
+import useHasMounted from "@/hooks/useHasMounted";
+
 // {/* temporary form for submitting problems data*/}
 // import { firestore } from "@/firebase/firebase";
 // import { doc, setDoc } from "firebase/firestore";
-import { useState } from "react";
-import { FaLess } from "react-icons/fa";
+
+
 
 export default function Home() {
 
 	const [loadingProblems, setLoadingProblems] = useState(true)
+	const hasMounted = useHasMounted()
+
+	if (!hasMounted) return null
 
 	// // {/* temporary form for submitting problems data*/}
 	// const [inputs, setInputs] = useState({
