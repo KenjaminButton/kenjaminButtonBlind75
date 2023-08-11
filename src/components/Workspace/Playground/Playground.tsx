@@ -8,11 +8,17 @@ import EditorFooter from './EditorFooter';
 import { Problem } from '@/utils/types/problem';
 
 type PlaygroundProps = {
-  problem: Problem
+  problem: Problem,
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>,
 };
 
-const Playground:React.FC<PlaygroundProps> = ({problem}) => {
+const Playground:React.FC<PlaygroundProps> = ({problem, setSuccess}) => {
   const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0)
+
+  const handleSubmit = () => {
+    alert("submitted!")
+  }
+
   return (
     <div className='flex flex-col bg-dark-layer-1 relative overflow-x-hidden'>
       <PreferenceNav />
@@ -69,7 +75,7 @@ const Playground:React.FC<PlaygroundProps> = ({problem}) => {
           </div>
         </div>
       </Split>
-      <EditorFooter />
+      <EditorFooter handleSubmit={handleSubmit}/>
     </div>
   )
 }
