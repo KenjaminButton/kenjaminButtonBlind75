@@ -21,22 +21,25 @@ const Topbar:React.FC<TopbarProps> = ({problemPage}) => {
 	const [user] = useAuthState(auth);
 	const setAuthModalState = useSetRecoilState(authModalState)
 	const router = useRouter()
+
 	const handleProblemChange = (isForward: boolean) => {
 		// console.log(router.query) // cOnfirming pid field
 		// console.log(problems[router.query.pid]) // Received an obj that need destructuring.
 		const {order} = problems[router.query.pid as string] as Problem;
 		const direction = isForward ? 1 : -1;
 		const nextProblemOrder = order + direction
-		const nextProblemkey = Object.keys(problems).find(key => problems[key].order === nextProblemOrder)
+		const nextProblemKey = Object.keys(problems).find(key => problems[key].order === nextProblemOrder)
 		// console.log('nextProblemkey', nextProblemkey)
-		if (isForward && !nextProblemkey) {
+		if (isForward && !nextProblemKey) {
 			// If user is on last problem, next problem will take us to first problem in project.
 			const firstProblemKey = Object.keys(problems).find(key => problems[key].order === 1)
 			router.push(`/problems/${firstProblemKey}`)
-		} else if (!isForward && !nextProblemkey) {
+		} else if (!isForward && !nextProblemKey) {
 			// If user is on first problem, previous problem will take us to last problem in project.
 			const lastProblemKey = Object.keys(problems).find(key => problems[key].order === Object.keys(problems).length)
 			router.push(`/problems/${lastProblemKey}`)
+		} else {
+			router.push(`/problems/${nextProblemKey}`)
 		}
 	}
 
