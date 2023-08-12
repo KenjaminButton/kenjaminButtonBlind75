@@ -23,21 +23,11 @@ https://v1.tailwindcss.com/docs/customizing-colors
 
 Temporary Solution to adding problems to firestore: `src/pages/index.tsx`
 
-## Next Steps:
-
-- [x] Build out dislike functionality 
-- [x] Build out favorites (star) functionality
-- [x] Build out next && previous problem links
-- [x] Notify user of successful submission with confetti package
-
-- [x] Implment Code Submission
-
-
-
 # How to Add New Problems:
 
 - Temporary Solution: Go to `src/pages/index.tsx` and uncomment out the imports, state, and form field
 
-
+## Next Steps:
+- [] Keep code in local storage
 
 
