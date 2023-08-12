@@ -7,17 +7,19 @@ import { javascript } from '@codemirror/lang-javascript';
 import EditorFooter from './EditorFooter';
 import { Problem } from '@/utils/types/problem';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '@/firebase/firebase';
+import { auth, firestore } from '@/firebase/firebase';
 import { toast } from 'react-toastify';
 import { problems } from '@/utils/problems';
 import { useRouter } from 'next/router';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
 type PlaygroundProps = {
-  problem: Problem,
-  setSuccess: React.Dispatch<React.SetStateAction<boolean>>,
+  problem: Problem;
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+  setSolved: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Playground:React.FC<PlaygroundProps> = ({problem, setSuccess}) => {
+const Playground:React.FC<PlaygroundProps> = ({problem, setSuccess, setSolved}) => {
   const [activeTestCaseId, setActiveTestCaseId] = useState<number>(0)
   const [userCode, setUserCode] =  useState<string>(problem.starterCode) 
   const [user] = useAuthState(auth)
@@ -48,10 +50,16 @@ const Playground:React.FC<PlaygroundProps> = ({problem, setSuccess}) => {
         setTimeout( () => {
             setSuccess(false)
         }, 4000)
+
+        const userRef = doc(firestore, 'users', user.uid)
+        await updateDoc(userRef, {
+          solvedProblems: arrayUnion(pid)
+        })
+        setSolved(true)
       }
-    } catch (error) {
-      console.error(error)
-      if (error.message.startsWith('Error: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:')) {
+    } catch (error: any) {
+      
+      if (error.message.startsWith('AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:')) {
         // do something
         toast.error('One or more of our test cases failed', {
           position: 'top-center',
@@ -59,7 +67,7 @@ const Playground:React.FC<PlaygroundProps> = ({problem, setSuccess}) => {
           theme: 'dark'
         })
       } else {
-        toast.error('Whoops! Something on our end messed up! Fill out an issue ticket and let us know', {
+        toast.error(error.message, {
           position: 'top-center',
           autoClose: 3000,
           theme: 'dark'
