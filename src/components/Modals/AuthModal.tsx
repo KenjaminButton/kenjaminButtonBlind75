@@ -24,7 +24,7 @@ function useCloseModal() {
 		window.addEventListener('keydown', handleEsc)
 		// Cleanup function removing evt listener
 		return () => window.removeEventListener('keydown', handleEsc)
-	}, [])
+	}, [closeModal])
 	return closeModal
 }
 

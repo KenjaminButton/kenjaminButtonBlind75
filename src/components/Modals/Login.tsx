@@ -98,7 +98,6 @@ const Login:React.FC<LoginProps> = () => {
             border-gray-500
             placeholder-gray-400
             text-gray-300
-            text-white
           ' 
           placeholder='*assword'
         />
