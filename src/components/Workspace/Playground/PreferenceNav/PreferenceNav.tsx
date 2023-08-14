@@ -12,8 +12,7 @@ const PreferenceNav:React.FC<PreferenceNavProps> = ({setSettings, settings}) => 
 
 	const [isFullScreen, setIsFullScreen] = useState(false)
 
-	const handleFullScreen = (evt) => {
-		console.log('handleFullScreen clicked', evt)
+	const handleFullScreen = () => {
 		if (isFullScreen) {
 			document.exitFullscreen()
 		} else {
