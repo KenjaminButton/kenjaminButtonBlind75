@@ -2,35 +2,11 @@ import React, { useEffect } from 'react';
 import { IoCloseCircleSharp} from 'react-icons/io5'
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {authModalState} from '@/atoms/authModalAtom'
-
-
 import Login from './Login';
 import Signup from './Signup';
 import ResetPassword from './ResetPassword';
 
-
-function useCloseModal() {
-	const setAuthModal = useSetRecoilState(authModalState)
-	const closeModal = () => {
-		setAuthModal( () => ({ ...ProgressEvent, isOpen: false, type: "login"}))
-	}
-
-	useEffect( () => {
-		const handleEsc = (e: KeyboardEvent) => {
-			if (e.key === 'Escape') {
-				closeModal()
-			}
-		}
-		window.addEventListener('keydown', handleEsc)
-		// Cleanup function removing evt listener
-		return () => window.removeEventListener('keydown', handleEsc)
-	}, [closeModal])
-	return closeModal
-}
-
-type AuthModalProps = {
-  
-};
+type AuthModalProps = {};
 
 const AuthModal:React.FC<AuthModalProps> = () => {
   const authModal = useRecoilValue(authModalState)
@@ -62,3 +38,41 @@ const AuthModal:React.FC<AuthModalProps> = () => {
 	);
 }
 export default AuthModal;
+
+
+// function useCloseModal() {
+// 	const setAuthModal = useSetRecoilState(authModalState)
+// 	const closeModal = () => {
+// 		setAuthModal( () => ({ ...ProgressEvent, isOpen: false, type: "login"}))
+// 	}
+
+// 	useEffect( () => {
+// 		const handleEsc = (e: KeyboardEvent) => {
+// 			if (e.key === 'Escape') {
+// 				closeModal()
+// 			}
+// 		}
+// 		window.addEventListener('keydown', handleEsc)
+// 		// Cleanup function removing evt listener
+// 		return () => window.removeEventListener('keydown', handleEsc)
+// 	}, [])
+// 	return closeModal
+// }
+
+function useCloseModal() {
+	const setAuthModal = useSetRecoilState(authModalState);
+
+	const closeModal = () => {
+		setAuthModal((prev) => ({ ...prev, isOpen: false, type: "login" }));
+	};
+
+	useEffect(() => {
+		const handleEsc = (e: KeyboardEvent) => {
+			if (e.key === "Escape") closeModal();
+		};
+		window.addEventListener("keydown", handleEsc);
+		return () => window.removeEventListener("keydown", handleEsc);
+	}, []);
+
+	return closeModal;
+}
