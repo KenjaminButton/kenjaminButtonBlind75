@@ -11,6 +11,18 @@ type AuthModalProps = {};
 const AuthModal:React.FC<AuthModalProps> = () => {
   const authModal = useRecoilValue(authModalState)
 	const closeModal = useCloseModal()
+
+  useEffect(() => {
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeModal();
+    };
+
+    window.addEventListener("keydown", handleKeydown);
+    return () => {
+      window.removeEventListener("keydown", handleKeydown);
+    };
+  }, [closeModal]);
+
   return (
 		<>
 			<div
