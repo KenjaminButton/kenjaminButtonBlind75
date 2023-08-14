@@ -4,9 +4,10 @@ import {AiFillYoutube} from 'react-icons/ai'
 import Link from 'next/link';
 import { IoClose } from 'react-icons/io5';
 import YouTube from 'react-youtube';
-import { collection, getDocs, orderBy, query } from 'firebase/firestore';
-import { firestore } from '@/firebase/firebase';
+import { collection, doc, getDoc, getDocs, orderBy, query } from 'firebase/firestore';
+import { auth, firestore } from '@/firebase/firebase';
 import { DBProblem } from '@/utils/types/problem';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 
 type ProblemsTableProps = { 
@@ -21,6 +22,8 @@ const ProblemsTable:React.FC<ProblemsTableProps> = ({setLoadingProblems}) => {
     videoId: ''
   });
   const problems = useGetProblems(setLoadingProblems)
+  const solvedProblems = useGetSolvedProblems()
+  console.log('sp....',solvedProblems)
   const closeModal = () => {
     setYoutubePlayer({ isOpen: false, videoId: '' })
   }
@@ -38,10 +41,12 @@ const ProblemsTable:React.FC<ProblemsTableProps> = ({setLoadingProblems}) => {
       <tbody className='text-pink-400'>
         {problems.map( (problem, idx) => {
           const difficultyColor = problem.difficulty === 'Easy' ? 'text-dark-green-s' : problem.difficulty === 'Medium' ? 'text-dark-yellow' : 'text-dark-pink'
+
           return (
             <tr className={`${idx % 2 === 1 ? `bg-dark-layer-1` : `` }`} key={problem.id}>
               <th className='px-2 py-4 font-medium whitespace-nowrap text-dark-green-s'>
-                <BsCheckCircle fontSize={'20'} width={'20'}/>
+                
+                {solvedProblems.includes(problem.id) && <BsCheckCircle fontSize={'20'} width={'20'}/>}
               </th>
               <td>
 
@@ -123,3 +128,21 @@ function useGetProblems(setLoadingProblems: React.Dispatch<React.SetStateAction<
 	return problems;
 }
 
+function useGetSolvedProblems() {
+  const [solvedProblems, setSolvedProblems] = useState<string[]>([])
+  const [user] = useAuthState(auth)
+  useEffect( () => {
+    const getSolvedProblems = async () => {
+      const userRef = doc(firestore, "users", user!.uid)
+      const userDoc = await getDoc(userRef)
+
+      if (userDoc.exists()) {
+        setSolvedProblems(userDoc.data().solvedProblems)
+      }
+    }
+    if (user) getSolvedProblems()
+    if (!user) setSolvedProblems([])
+  }, [user])
+  
+  return solvedProblems
+}

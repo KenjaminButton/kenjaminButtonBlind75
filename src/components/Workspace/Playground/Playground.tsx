@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import { problems } from '@/utils/problems';
 import { useRouter } from 'next/router';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import useLocalStorage from '@/hooks/useLocalStorage';
 
 type PlaygroundProps = {
   problem: Problem;
@@ -30,11 +31,15 @@ const Playground:React.FC<PlaygroundProps> = ({problem, setSuccess, setSolved}) 
   let [userCode, setUserCode] =  useState<string>(problem.starterCode) 
   const [user] = useAuthState(auth)
   const { query: {pid} } = useRouter()
+  
+  const [fontSize, setFontSize] = useLocalStorage('lcc-fontSize', '16px')
   const [settings, setSettings] = useState<ISettings>({
-    fontSize: '16px',
+    fontSize: fontSize,
     settingsModalIsOpen: false,
     dropdownIsOpen: false
   }) 
+
+  
 
   const handleSubmit = async () => {
     // If user is not logged in, return some error
