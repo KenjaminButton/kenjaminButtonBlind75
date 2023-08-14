@@ -78,7 +78,7 @@ const ProblemsTable:React.FC<ProblemsTableProps> = ({setLoadingProblems}) => {
                   fontSize={'25'}
                   onClick={() => setYoutubePlayer({isOpen: true, videoId: problem.videoId as string})}
                 />) : (
-                  <p className='text-gray-400'>I'll post this after I solve it</p>
+                  <p className='text-gray-400'>I will post this after I solve it</p>
                 )}
               </td>
             </tr>
